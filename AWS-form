@@ -43,5 +43,6 @@
     </script>
 </head>
 <body onLoad="startTime()">
+<div id="txt"></div>
 </body>
 </html>
