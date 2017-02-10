@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Time</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <style type="text/css">
+         body{background:url(自行车壁纸.jpg);width:auto;height:auto;}
+        img {width:100px; height:100px;} 
+	.all{margin:130px 140px 140px 130px;}
+	.scanit{width:200px;height:200px;color:#6FC;}
+    </style>
+    <script type="text/javascript">  
+    
+</script>   
+  
+<!--         调用jquery需要的库，手机版和电脑版的不同 -->
+        <script type="text/javascript" src="javascripts/zepto.min.js">  
+	
+        </script> 
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/open-develop/1.0.0/dingtalk.js"></script>
+    <script type="text/javascript" src="javascripts/demo.js"></script>
+    <script type="text/javascript">
+    
+    function startTime(){
+	var today=new Date()
+	var h=today.getHours()
+	var m=today.getMinutes()
+	var s=today.getSeconds()
+	m=checkTime(m)
+	s=checkTime(s)
+	document.getElementById('txt').innerHTML=h+":"+m+":"+s
+	t=setTimeout('startTime()',500)
+	}
+	function checkTime(i){
+		if(i<10)
+		{i="0"+i}
+			return i
+}
+    </script>
+</head>
+<body>
+<div id="txt"><button onclick="stertTime()">Time</div>
+</body>
+</html>
