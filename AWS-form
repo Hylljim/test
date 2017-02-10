@@ -42,7 +42,6 @@
 }
     </script>
 </head>
-<body>
-<div id="txt"><button onclick="stertTime()">Time</div>
+<body onLoad="startTime()">
 </body>
 </html>
