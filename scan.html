@@ -1,27 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+ <style type="text/css">
+         body{background-color:grey;}
+         img {width:100px; height:100px;} 
+	.all{margin:130px 140px 140px 130px;}
+	.scanit{width:200px;height:200px;color:#6FC;}
+    </style>
 	<meta charset="UTF-8">
 	<title>Document</title>
 <script type="text/javascript" src="https://g.alicdn.com/dingding/open-develop/1.0.0/dingtalk.js">	
 </script>
 <script type="text/javascript">
 	dd.config({
-    agentId: '', // 必填，微应用ID
+    agentId: '75710882', // 必填，微应用ID
     corpId: 'ding0bc18b9f928dc17e35c2f4657eb6378f',//必填，企业ID
-    timeStamp: , // 必填，生成签名的时间戳
-    nonceStr: '', // 必填，生成签名的随机串
-    signature: '', // 必填，签名
-    type:0/1,   //选填。0表示微应用的jsapi,1表示服务窗的jsapi。不填默认为0。该参数从dingtalk.js的0.8.3版本开始支持
+    timeStamp: '1440678945', // 必填，生成签名的时间戳
+    nonceStr: 'abcdefg', // 必填，生成签名的随机串
+    signature: 'b968b2dcdcda16d8f7143bca5100658f180402b1', // 必填，签名
+    type:0,   //选填。0表示微应用的jsapi,1表示服务窗的jsapi。不填默认为0。该参数从dingtalk.js的0.8.3版本开始支持
     jsApiList : [ 'runtime.info', 'biz.contact.choose',
         'device.notification.confirm', 'device.notification.alert',
         'device.notification.prompt', 'biz.ding.post',
         'biz.util.openLink' ] // 必填，需要使用的jsapi列表，注意：不要带dd。
 });
 
-dd.ready(function(){
-    ;
-});
+dd.ready(function(res){
+          logger.i('ready');
+          dd.biz.util.scan({
+            type: 'barCode',
+	    //type为qrCode或者barCode
+            onSuccess: function(data) {
+            //onSuccess将在扫码成功之后回调 
+	     	/* data结构
+        		{'text': String} 
+     		 */
+		
+               (JSON.stringify(data.text))
+            },
+           onFail : function(err) {
+           }
+        });
+      });
 
 dd.error(function(error){
        /**
@@ -30,12 +50,39 @@ dd.error(function(error){
            errorCode:"错误码"
         }
        **/
-       alert('dd error: ' + JSON.stringify(err));
+       alert('dd error: ' + JSON.stringify(error));
 });
+	
+	
+	function openQrCode() {
+            dd.biz.util.scan({
+           type: 'qrCode',
+	    //type为qrCode或者barCode
+            onSuccess: function(data) {
+            //onSuccess将在扫码成功之后回调 
+	     	/* data结构
+        		{'text': String} 
+     		 */
+		
+               (JSON.stringify(data.text)
+            },
+           onFail : function(err) {
+           }
+        });
+}
+      }
+	
+	
 
 </script>
 </head>
 <body>
-	
+<div class="all">
+	<div class="one">       
+    		<img src="an.jpn" class="bj" onclick="openQrCode()"><br/>
+		<div class="scanit">&nbsp;&nbsp;&nbsp;<button onclick="openQrCode()">产品扫码</button></div>
+		
+    	</div>
+</div>
 </body>
 </html>
