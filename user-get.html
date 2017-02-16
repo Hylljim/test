@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <style type="text/css">
+         body{background:url(自行车壁纸.jpg);width:auto;height:auto;}
+        img {width:100px; height:100px;} 
+	.all{margin:130px 140px 140px 130px;}
+	.scanit{width:200px;height:200px;color:#6FC;}
+    </style>
+    <script type="text/javascript">  
+            var _config = <%= controler.GetConfigs.getConfig(request) %>;  
+	   
+		function getURL(url) { 
+		var xmlhttp = new ActiveXObject( "Microsoft.XMLHTTP"); 
+		xmlhttp.open("GET", url, false); 
+		xmlhttp.send(); 
+		if(xmlhttp.readyState==4) { 
+		if(xmlhttp.Status != 200) alert("不存在"); 
+		return xmlhttp.Status==200; 
+} 
+return false; 
+} 
+</script> 
+<a href= "http://www.baidu.com/" onclick= "return getURL(this.href) "> search </a> 
+	    
+        </script>  
+  
+<!--         调用jquery需要的库，手机版和电脑版的不同 -->
+        <script type="text/javascript" src="javascripts/zepto.min.js">  
+	
+        </script> 
+    <script type="text/javascript" src="https://g.alicdn.com/dingding/open-develop/1.0.0/dingtalk.js"></script>
+    <script type="text/javascript" src="javascripts/demo.js"></script>
+    <script type="text/javascript">
+    dd.config({
+    agentId: '75563885',
+    corpId: 'ding0bc18b9f928dc17e35c2f4657eb6378f',
+    timeStamp:'2017210942',
+    nonceStr: 'hillkim',
+    signature: '39c4c86807935d4a6d937cbc17cca4c5f30eb8b5',
+    jsApiList : [ 'runtime.info', 'biz.contact.choose','biz.util.scan',
+        'device.notification.confirm', 'device.notification.alert',
+        'device.notification.prompt', 'biz.ding.post',
+        'biz.util.openLink' ] 
+});
+
+dd.ready(function(res){
+          logger.i('ready');
+          dd.biz.util.scan({
+            type: 'barCode',
+	    //type为qrCode或者barCode
+            onSuccess: function(data) {
+            //onSuccess将在扫码成功之后回调 
+	     	/* data结构
+        		{'text': String} 
+     		 */
+		
+               (JSON.stringify(data.text))
+	       windows.location.href="data.text"
+            },
+           onFail : function(err) {
+           }
+        });
+    
+      });
+      dd.error(function(error) {
+          alert(error.errorCode);
+          alert(JSON.stringify(error));
+          logger.i('ready');
+      });
+
+   function openQrCode() {
+            dd.biz.util.scan({
+           type: 'barCode',
+	    //type为qrCode或者barCode
+            onSuccess: function(data) {
+            //onSuccess将在扫码成功之后回调 
+	     	/* data结构
+        		{'text': String} 
+     		 */
+		
+               (JSON.stringify(data.text))
+	       windows.location.href="data.text"
+            },
+           onFail : function(err) {
+           }
+        });
+}
+      }
+
+    </script>
+</head>
+<body>
+<div class="all">
+	<div class="one">       
+    		<img src="scan2.png" class="bj" onclick="openQrCode()"><br/>
+		<div class="scanit">&nbsp;&nbsp;&nbsp;<button onclick="openQrCode()">产品扫码</button></div>
+		
+    	</div>
+</div>
+</body>
+</html>
